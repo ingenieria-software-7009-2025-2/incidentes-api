@@ -75,7 +75,7 @@ public class UsuarioController{
     fun getUsuario(): ResponseEntity<Usuarios>{
         val usuario = Usuarios(
             mail = "mail get",
-            password = "pass get",
+            password = "password get",
             token = "token get"
         )
         return ResponseEntity.ok(usuario)
