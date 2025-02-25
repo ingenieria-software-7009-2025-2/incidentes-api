@@ -67,4 +67,14 @@ public class UsuarioController{
         return ResponseEntity.ok(usuario)
     }
 
+    /**
+     *Un metodo Post para crear un usuario (/v1/users/nuevoUsuario)
+     * Este endpoint unicamente debe de devolver (por ahora) un código 200 ok y un String con la frase "Usuario creado"
+     * Esto pasa cuando se le manda un JSON de con los datos del cuerpo de un usuario.
+     */
+    @PostMapping("/nuevoUsuario")
+    fun nuevoUsuario(@RequestBody usuarioBody: UsuarioBody): ResponseEntity<String>{
+        return ResponseEntity.ok("Usuario creado")
+    }
+
 }
