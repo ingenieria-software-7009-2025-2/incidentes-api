@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "185fa0da-7cad-4b92-99d2-3fdb4f2c3392",
+		"name": "Pruebas - Inge Soft",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42566298"
+	},
+	"item": [
+		{
+			"name": "Info - User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Close Session - User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Login - User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Create - User",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

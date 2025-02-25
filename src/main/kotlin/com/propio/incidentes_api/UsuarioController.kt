@@ -11,36 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody
 @RequestMapping("/v1/users")
 public class UsuarioController{
 
-    /**
-    No tengo ni la mas minima idea de que hice aqui, solo hice lo que hicimos en laboratorio
-    @GetMapping
-    fun retriveUsuarios():ResponseEntity<Usuarios>{
-
-        val miUsuario = Usuarios(
-            mail = "kkkk",
-            password = "1234",
-            token = "12345"
-        )
-        return ResponseEntity.ok(miUsuario)
-    }
-    */
-
-
     /**2.1
     *Un metodo Post para crear un usuario:
     *El endpoint debe debe de aceptar en el body del request la representación del modelo Usuario en JSON, despues
      * crear el objeto Usuario y devolverlo con un 200 ok.
     *Hint: Revisen el ejemplo del MascotaController que recibe la info de una mascota, es idéntico.*/
-    @PostMapping
-    fun retriveUsuarios(): ResponseEntity<Usuarios>{
 
-        val miUsuario = Usuarios(
-            mail = "Usuario",
-            password = "contraseña",
-            token = "token"
+    @PostMapping
+    fun retriveUsuarios(@RequestBody usuarioBody: UsuarioBody): ResponseEntity<UsuarioBody> {
+
+        val user = UsuarioBody(
+            mail = usuarioBody.mail,
+            password = usuarioBody.password,
+            token = usuarioBody.token
         )
 
-        return ResponseEntity.ok(miUsuario)
+        return ResponseEntity.ok(user)
     }
 
     /**2.2
@@ -48,9 +34,9 @@ public class UsuarioController{
      * Este endpoint recibe en el body un JSON con el campo mail y password. Únicamente debe de devolver (por ahora) un código 200 ok con la creación de un objeto Usuario.
      */
     @PostMapping("/login")
-    fun loginUsuarios(@RequestBody usuarioBody: UsuariosBody): ResponseEntity<Usuarios>{
+    fun loginUsuarios(@RequestBody usuarioBody: UsuarioBody): ResponseEntity<Usuario>{
 
-        val usuario = Usuarios(
+        val usuario = Usuario(
             mail = usuarioBody.mail,
             password = usuarioBody.password,
         )
@@ -72,8 +58,8 @@ public class UsuarioController{
      * Este endpoint unicamente debe de regresar un objeto Usuario con la información hardcodeada de un usuario.
      */
     @GetMapping("/me")
-    fun getUsuario(): ResponseEntity<Usuarios>{
-        val usuario = Usuarios(
+    fun getUsuario(): ResponseEntity<Usuario>{
+        val usuario = Usuario(
             mail = "kkkk",
             password = "1234",
             token = "12345"
