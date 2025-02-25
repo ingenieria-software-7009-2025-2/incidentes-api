@@ -35,9 +35,9 @@ public class UsuarioController{
     fun retriveUsuarios(): ResponseEntity<Usuarios>{
 
         val miUsuario = Usuarios(
-            mail = "Usuario",
-            password = "contraseña",
-            token = "token"
+            mail = "user crear user",
+            password = "pass crear user",
+            token = "token crear user"
         )
 
         return ResponseEntity.ok(miUsuario)
@@ -74,9 +74,9 @@ public class UsuarioController{
     @GetMapping("/me")
     fun getUsuario(): ResponseEntity<Usuarios>{
         val usuario = Usuarios(
-            mail = "kkkk",
-            password = "1234",
-            token = "12345"
+            mail = "mail get",
+            password = "pass get",
+            token = "token get"
         )
         return ResponseEntity.ok(usuario)
     }
