@@ -1,6 +1,6 @@
 package com.propio.incidentes_api
 
-data class UsuarioBody(
+data class Usuario(
     val mail: String = "",
     val password: String = "",
     val token: String = "",
