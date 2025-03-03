@@ -15,8 +15,8 @@ data class User(
     @Column(nullable = false)
     val password: String = "",
 
-    @Column(nullable = false)
-    val token: String = ""
+    @Column(nullable = true)
+    var token: String? = ""
 )
 
 

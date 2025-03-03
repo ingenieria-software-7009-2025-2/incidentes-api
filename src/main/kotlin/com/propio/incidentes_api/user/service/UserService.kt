@@ -3,20 +3,30 @@ import com.propio.incidentes_api.user.domain.UserD
 import com.propio.incidentes_api.user.repository.entity.User
 import com.propio.incidentes_api.user.repository.UserRepository
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class UserService(private var userRepository: UserRepository) {
 
-    fun logout(): String {
-        return "Sesion cerrada"
+    fun logout(token: String): Boolean {
+        val userFound = userRepository.findByToken(token)
+
+        if (userFound != null) {
+            userFound.token = null
+            userRepository.save(userFound)
+            return true
+        }
+
+        return false
     }
 
+
     fun allUsers(): List<UserD> {
-        // Muestra todos los usuarios de la base
         val myUsers = mutableListOf<UserD>()
         val result = userRepository.findAll()
         result.forEach{ user ->
             val userFound = UserD(
+                id = user.id.toString(),
                 mail = user.mail,
                 password = user.password,
                 token = user.token
@@ -35,12 +45,52 @@ class UserService(private var userRepository: UserRepository) {
         val result = userRepository.save(usuarioDB)
 
         val usuarioCreado = UserD(
+            id = result.id.toString(),
             mail = result.mail,
             token = result.token,
             password = result.password,
         )
         return usuarioCreado
     }
+
+    fun login(mail: String, password: String): UserD? {
+        val userFound = userRepository.findByEmailAndPassword(mail, password)
+
+        if (userFound != null) {
+            val token = UUID.randomUUID().toString()
+            updateTokenUser(userFound, token)
+            return UserD(
+                id = userFound.id.toString(),
+                mail = userFound.mail,
+                password = userFound.password,
+                token = token
+            )
+        }
+
+        return null
+    }
+
+    fun updateTokenUser(user: User, token: String){
+        user.token = token
+        userRepository.save(user)
+    }
+
+    fun getInfoAboutMe(token: String): UserD?{
+        val userFound = userRepository.findByToken(token)
+
+        if(userFound!= null){
+            return UserD(
+                id = userFound.id.toString(),
+                mail = userFound.mail,
+                password = userFound.password,
+                token = "******"
+            )
+        }
+
+        return null
+    }
+
+
 
 
 
