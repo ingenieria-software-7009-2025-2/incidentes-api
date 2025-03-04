@@ -1,22 +1,19 @@
 {
 	"info": {
-		"_postman_id": "185fa0da-7cad-4b92-99d2-3fdb4f2c3392",
-		"name": "Pruebas - Inge Soft",
+		"_postman_id": "d56fd5ef-ad2e-49f0-a6d9-4a331c657b22",
+		"name": "Pruebas - Inge de Soft 2.0",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "42566298"
 	},
 	"item": [
 		{
-			"name": "Info - User",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "CrearUsuario",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n    \"mail\": \"ejemplo1@ejemplo.com\",\r\n    \"password\": \"ejemplo\",\r\n    \"token\": \"token\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -24,7 +21,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/v1/users/me",
+					"raw": "http://localhost:8080/v1/users/create",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -33,50 +30,20 @@
 					"path": [
 						"v1",
 						"users",
-						"me"
+						"create"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Close Session - User",
+			"name": "LoginUsuario",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/v1/users/logout",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"v1",
-						"users",
-						"logout"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login - User",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"mail\" : \"algo@example.com\",\r\n    \"password\" : \"hola123\"\r\n\r\n}",
+					"raw": "{\r\n    \"mail\": \"ejemplo1@ejemplo.com\",\r\n    \"password\": \"ejemplo\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -100,21 +67,18 @@
 			"response": []
 		},
 		{
-			"name": "Create - User",
+			"name": "LogoutUsuario",
 			"request": {
 				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"mail\": \"algo@example.com\",\r\n    \"password\" : \"hola123\",\r\n    \"token\": \"12345\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "25df1c4f-0540-4bcb-bf88-d0674136e3c6",
+						"type": "text"
 					}
-				},
+				],
 				"url": {
-					"raw": "http://localhost:8080/v1/users",
+					"raw": "http://localhost:8080/v1/users/logout",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -122,9 +86,45 @@
 					"port": "8080",
 					"path": [
 						"v1",
-						"users"
+						"users",
+						"logout"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "InfoMia",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "4b16172d-54f2-4937-adfa-12cc85c6f26e",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/v1/users/me",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RecuperarTodos",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}
