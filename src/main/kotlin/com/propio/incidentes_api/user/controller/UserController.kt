@@ -4,6 +4,7 @@ import com.propio.incidentes_api.user.controller.body.LoginUserBody
 import com.propio.incidentes_api.user.controller.body.UserBody
 import com.propio.incidentes_api.user.domain.UserD
 import com.propio.incidentes_api.user.service.UserService
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -37,6 +38,7 @@ class UserController(val userService : UserService) {
         return ResponseEntity.ok(response)
 
     }
+
 
     @PostMapping("/login")
     fun login(@RequestBody loginUserBody: LoginUserBody): ResponseEntity<UserD>{

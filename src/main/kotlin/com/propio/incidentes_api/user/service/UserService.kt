@@ -39,19 +39,23 @@ class UserService(private var userRepository: UserRepository) {
 
     fun addUser(usuario: UserD): UserD {
 
-        val usuarioDB =
-            User(mail = usuario.mail, password = usuario.password, token = usuario.token)
+        val usuarioDB = User(
+            mail = usuario.mail,
+            password = usuario.password,
+            token = usuario.token
+        )
 
         val result = userRepository.save(usuarioDB)
 
-        val usuarioCreado = UserD(
+
+        return UserD(
             id = result.id.toString(),
             mail = result.mail,
             token = result.token,
-            password = result.password,
+            password = result.password
         )
-        return usuarioCreado
     }
+
 
     fun login(mail: String, password: String): UserD? {
         val userFound = userRepository.findByEmailAndPassword(mail, password)

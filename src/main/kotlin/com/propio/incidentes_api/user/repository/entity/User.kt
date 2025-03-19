@@ -3,7 +3,7 @@ package com.propio.incidentes_api.user.repository.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "tb_user", schema = "schema_user")
+@Table(name = "tb_user")
 data class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
