@@ -1,6 +1,7 @@
 package com.propio.incidentes_api.user.controller
 
 import com.propio.incidentes_api.user.controller.body.LoginUserBody
+import com.propio.incidentes_api.user.controller.body.PasswordUserBody
 import com.propio.incidentes_api.user.controller.body.UserBody
 import com.propio.incidentes_api.user.domain.UserD
 import com.propio.incidentes_api.user.service.UserService
@@ -56,6 +57,16 @@ class UserController(val userService : UserService) {
     fun me(@RequestHeader("Authorization") token: String): ResponseEntity<UserD>{
         val response = userService.getInfoAboutMe(token)
         return if(response != null) {
+            ResponseEntity.ok(response)
+        } else{
+            ResponseEntity.status(401).build()
+        }
+    }
+
+    @PostMapping("/me")
+    fun me(@RequestHeader("Authorization") token: String, @RequestBody pass: PasswordUserBody): ResponseEntity<UserD>{
+        val response = userService.updateInfo(token, pass.password)
+        return if (response != null){
             ResponseEntity.ok(response)
         } else{
             ResponseEntity.status(401).build()

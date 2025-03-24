@@ -14,5 +14,7 @@ interface UserRepository : CrudRepository<User, Long> {
 
     @Query(value = "SELECT * FROM tb_user WHERE token=?1", nativeQuery = true)
     fun findByToken(token: String): User?
+
+
 }
 

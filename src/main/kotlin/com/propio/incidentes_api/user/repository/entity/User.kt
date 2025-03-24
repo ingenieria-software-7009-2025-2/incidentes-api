@@ -10,10 +10,10 @@ data class User(
     val id: Long = 0,
 
     @Column(nullable = false, unique = true)
-    val mail: String = "",
+    var mail: String = "",
 
     @Column(nullable = false)
-    val password: String = "",
+    var password: String = "",
 
     @Column(nullable = true)
     var token: String? = ""

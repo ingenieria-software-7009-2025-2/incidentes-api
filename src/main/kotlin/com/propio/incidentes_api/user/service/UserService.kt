@@ -94,6 +94,22 @@ class UserService(private var userRepository: UserRepository) {
         return null
     }
 
+    fun updatePassword(user: User, password: String){
+        user.password = password
+        userRepository.save(user)
+    }
+
+    fun updateInfo(token : String, password: String): UserD? {
+        val userFound = userRepository.findByToken(token)
+
+        if(userFound != null){
+           updatePassword(userFound, password)
+            return getInfoAboutMe(token)
+        }
+
+        return null
+    }
+
 
 
 
