@@ -1,0 +1,233 @@
+openapi: 3.0.0
+info:
+  title: Documentación para el apartado de Usuarios
+  version: 1.0.1
+  description: API usada para el cierre, inicio y actualización de datos del usuario.
+
+servers:
+  - url: http://localhost:8080/v1
+    description: Servidor local de desarrollo
+
+paths:
+  /users/logout:
+    post:
+      tags:
+        - Usuarios
+      summary: Cierre de Sesión
+      description: Cierra la sesión del usuario y anula su token.
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          description: Token de autenticación del usuario.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: La Sesión fue terminada con éxito y se eliminó el token.
+          content:
+            application/json:
+              schema:
+                type: string
+                example: "Sesión Finalizada"
+
+  /users/all:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtener todos los usuarios
+      description: Devuelve una lista con todos los usuarios registrados en la base de datos.
+      responses:
+        "200":
+          description: Lista de usuarios obtenida exitosamente.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                      example: 1
+                    mail:
+                      type: string
+                      example: "juan@example.com"
+                    password:
+                      type: string
+                      example: "juanElPro"
+                    token:
+                      type: string
+                      example: "eyJhbGciOiJIUzI1NiIsIn..."
+
+  /users/create:
+    post:
+      tags:
+        - Usuarios
+      summary: Crea un usuario
+      description: Crea un nuevo usuario en la base de datos con correo, contraseña y un token.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mail:
+                  type: string
+                  format: email
+                  example: "usuario@example.com"
+                password:
+                  type: string
+                  example: "123456"
+                token:
+                  type: string
+                  nullable: true
+                  example: "eyJhbGciOiJIUzI1NiIsIn..."
+      responses:
+        "200":
+          description: Usuario creado exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  mail:
+                    type: string
+                    format: email
+                    example: "usuario@example.com"
+                  password:
+                    type: string
+                    example: "123456"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsIn..."
+
+  /users/login:
+    post:
+      tags:
+        - Usuarios
+      summary: Inicia sesión
+      description: Inicia la sesión de un usuario con su correo y contraseña.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mail:
+                  type: string
+                  format: email
+                  example: "usuario@example.com"
+                password:
+                  type: string
+                  example: "123456"
+      responses:
+        "200":
+          description: Inicio de sesión exitoso.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  mail:
+                    type: string
+                    format: email
+                    example: "usuario@example.com"
+                  password:
+                    type: string
+                    example: "123456"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsIn..."
+
+  /users/me:
+    get:
+      tags:
+        - Usuarios
+      summary: Obtener información del usuario autenticado
+      description: Devuelve la información del usuario autenticado basado en el token proporcionado.
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          description: Token de autenticación del usuario.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Información del usuario obtenida con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  mail:
+                    type: string
+                    format: email
+                    example: "usuario@example.com"
+                  password:
+                    type: string
+                    example: "12345"
+                  token:
+                    type: string
+                    example: "*****"
+
+    post:
+      tags:
+        - Usuarios
+      summary: Actualizar la información del usuario autenticado
+      description: Permite actualizar la información del usuario autenticado mediante un nuevo password.
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          description: Token de autenticación del usuario.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: "nuevaContraseña123"
+      responses:
+        "200":
+          description: Información del usuario actualizada con éxito.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 1
+                  mail:
+                    type: string
+                    format: email
+                    example: "usuario@example.com"
+                  password:
+                    type: string
+                    example: "nuevaContraseña123"
+                  token:
+                    type: string
+                    example: "*****"
+
+
+
+                    
+

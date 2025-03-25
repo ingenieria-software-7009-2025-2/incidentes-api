@@ -5,15 +5,13 @@ import com.propio.incidentes_api.user.controller.body.PasswordUserBody
 import com.propio.incidentes_api.user.controller.body.UserBody
 import com.propio.incidentes_api.user.domain.UserD
 import com.propio.incidentes_api.user.service.UserService
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
+@CrossOrigin(origins = ["http://localhost:5173"] )
 @RestController
 @RequestMapping("/v1/users")
-
 class UserController(val userService : UserService) {
-
 
     @PostMapping("/logout")
     fun logout(@RequestHeader("Authorization") token: String): ResponseEntity<String> {
